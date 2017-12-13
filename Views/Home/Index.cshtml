@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/css/styles.css"/>
+    <title>Tamagotchi</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Let's Play!!</h1>
+        <div class="statbar">
+            <h2>Fullness: <span>@ViewBag.Full</span></h2>
+            <h2>Happiness: <span>@ViewBag.Happy</span></h2>
+            <h2>Meals: <span>@ViewBag.Meals</span></h2>
+            <h2>Energy: <span>@ViewBag.Energy</span></h2>
+        </div>
+        <div class="game">
+            <img src="@ViewBag.Image" alt="default img">
+        </div>
+        @{
+            if (@ViewBag.Win == null && @ViewBag.Lose == null && @ViewBag.Image != "/img/egg.gif")
+            {
+                <div class="buttons">
+                    <form action="/feed" method="post">
+                        <input type="submit" value="Feed">
+                    </form>
+
+                    <form action="/play" method="post">
+                        <input type="submit" value="Play">
+                    </form>
+
+                    <form action="/work" method="post">
+                        <input type="submit" value="Work">
+                    </form>
+
+                    <form action="/sleep" method="post">
+                        <input type="submit" value="Sleep">
+                    </form>
+                    <h1>@ViewBag.Outcome</h1>
+                </div>
+            }
+            else if (@ViewBag.Image == "/img/egg.gif"){
+                <form action="/hatch" method="post">
+                    <input type="submit" value="Hatch egg!">
+                </form>
+            }
+            else{
+                <h1>@ViewBag.Win</h1>
+                <h1>@ViewBag.Lose</h1>
+                <form action="/restart" method="post">
+                    <input type="submit" value="Play Again?">
+                </form>
+            }
+        }
+        
+    </div>
+</body>
+</html>
